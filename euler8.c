@@ -13,7 +13,7 @@ biggest array of digits.
 
 int main()
 {
-	int i, j, x;
+	int pos, j, x;
 	long long toTest, biggest;
 	char bignumber[999];
 	int buffer[12];
@@ -25,6 +25,14 @@ int main()
 		return 1;
 	fgets(bignumber, 1000, (FILE*)fp);
 
-	//Test
-	fprint("%c \n", bignumber[1]);
+	//This controls position in bignumber array
+	for(pos = 0; pos <= 999; pos++)
+	{
+		//This fills buffer
+		for(j = 0; j <= 12; j++)
+		{
+			buffer[j] = (bignumber[pos+j] - '0');
+			printf("%d\n", buffer[j]);
+		}
+	}
 }

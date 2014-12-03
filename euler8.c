@@ -14,10 +14,10 @@ biggest array of digits.
 
 int main()
 {
-	int pos, j, x;
+	int pos, j, x, bigstart;
 	long long toTest, biggest;
 	char bignumber[1000];
-	int buffer[12];
+	char biggestdigits[12];
 
 	//Initializes file
 	FILE *fp;
@@ -29,21 +29,19 @@ int main()
 	//This controls position in bignumber array
 	for(pos = 0; pos < 1000-12; pos++)//-13
 	{
-		//printf("%c\n", bignumber[pos]);
-		//This fills buffer
 		for(j = 0; j <= 12; j++)
 		{
-			buffer[j] = (bignumber[pos+j] - '0');
+			toTest *= (bignumber[pos+j]);
 		}
-		//This multiplies every element in the array
-		for(x = 0; x <=12; x++)
-		{
-			toTest *= buffer[x];
-		}
-		//Check if multiplied array is bigger than previous biggest multiplied array
 		if(toTest > biggest)
-		{
-			
-		}
+			{
+				biggest = toTest;
+				bigstart = pos;
+			}
 	}
+	for(j = 0; j <= 12; j++)
+	{
+		biggestdigits[j] = bignumber[bigstart + j];
+	}
+	printf("Digits %s Product %lld", biggestdigits, biggest);
 }

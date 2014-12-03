@@ -8,6 +8,7 @@ check if the current digits in the 13 digit array is bigger than the current
 biggest array of digits.
 
 */
+
 #include <stdio.h>
 
 
@@ -26,13 +27,13 @@ int main()
 	fgets(bignumber, 1000, (FILE*)fp);
 
 	//This controls position in bignumber array
-	for(pos = 0; pos <= 999; pos++)
+	for(pos = 0; pos <= 999-12; pos++)
 	{
 		//This fills buffer
 		for(j = 0; j <= 12; j++)
 		{
 			buffer[j] = (bignumber[pos+j] - '0');
-			printf("%d\n", buffer[j]);
+			printf("%c %d\n", bignumber[pos+j], buffer[j]);
 		}
 	}
 }

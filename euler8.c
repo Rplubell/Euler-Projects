@@ -31,7 +31,7 @@ int main()
 	{
 		for(j = 0; j <= 12; j++)
 		{
-			toTest *= (bignumber[pos+j]);
+			toTest *= (bignumber[pos+j] - '0');
 		}
 		if(toTest > biggest)
 			{

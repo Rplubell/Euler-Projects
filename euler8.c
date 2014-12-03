@@ -34,7 +34,16 @@ int main()
 		for(j = 0; j <= 12; j++)
 		{
 			buffer[j] = (bignumber[pos+j] - '0');
-			printf("%c %d\n", bignumber[pos+j], buffer[j]);
+		}
+		//This multiplies every element in the array
+		for(x = 0; x <=12; x++)
+		{
+			toTest *= buffer[x];
+		}
+		//Check if multiplied array is bigger than previous biggest multiplied array
+		if(toTest > biggest)
+		{
+			
 		}
 	}
 }

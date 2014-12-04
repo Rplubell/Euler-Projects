@@ -8,9 +8,9 @@ int main()
 	{
 		for(inner = 1; inner < 100; inner++)
 		{
-			if(pow(outer, 2) + pow(inner, 2) + (pow(outer, 2) + pow(inner, 2) == 1000)
+			if((pow(outer, 2) + pow(inner, 2) + (pow(outer, 2) + pow(inner, 2))) == 1000)
 			{
-				printf("A %d B %d C %d", outer, inner, (pow(outer, 2) + pow(inner, 2)));
+				printf("A %d B %d C %d\n", outer, inner, (pow(outer, 2) + pow(inner, 2)));
 				return 1;
 			}
 		}

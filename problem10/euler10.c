@@ -2,9 +2,9 @@
 
 
 //Function from previous euler project, checks if number is prime
-int isPrime(long testing)
+int isPrime(long double testing)
 {
-        long i;
+        long double i;
 
 	if(testing == 2)
 		return 1;
@@ -13,7 +13,7 @@ int isPrime(long testing)
 		return 0;
 
 	//Skip even numbers
-	for(i = 3; i <= sqrt(testing); i+=2)
+	for(i = 3; i <= sqrtl(testing); i+=2)
 	{
 		if(testing % i == 0)
 			return 0;
@@ -23,12 +23,12 @@ int isPrime(long testing)
 
 int main()
 {
-	long i;
-	long long sum;
+	long double i;
+	long double sum;
 	for(i = 1; i < 2000000; i += 2)
 	{
 		if(isPrime(i))
 			sum += i;
 	}
-	printf("%lld Sum\n", sum);
+	printf("%LF Sum\n", sum);
 }

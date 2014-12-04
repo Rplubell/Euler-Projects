@@ -3,14 +3,16 @@
 
 int main()
 {
-	int outer, inner;
-	for(outer = 1; outer < 100; outer++)
+	int a, b;
+	double c;
+	for(b = 1; b < 1000; b++)
 	{
-		for(inner = 1; inner < 100; inner++)
+		for(a = 1; a <= b; a++)
 		{
-			if((pow(outer, 2) + pow(inner, 2) + (pow(outer, 2) + pow(inner, 2))) == 1000)
+			c = sqrt(pow(a, 2) + pow(b, 2));
+			if(a + b + c == 1000)
 			{
-				printf("A %d B %d C %d\n", outer, inner, (pow(outer, 2) + pow(inner, 2)));
+				printf("A %d B %d C %f %f\n", a, b, c, a * b * c);
 				return 1;
 			}
 		}

@@ -15,9 +15,9 @@ biggest array of digits.
 int main()
 {
 	int pos, j, x, bigstart;
-	long long toTest, biggest;
+	long didgey, biggest;
 	char bignumber[1000];
-	char biggestdigits[12];
+	biggest = 0;
 
 	//Initializes file
 	FILE *fp;
@@ -26,22 +26,20 @@ int main()
 		return 1;
 	fgets(bignumber, 1001, (FILE*)fp);
 
+
 	//This controls position in bignumber array
 	for(pos = 0; pos < 1000-12; pos++)//-13
 	{
+		didgey = 1;
 		for(j = 0; j <= 12; j++)
 		{
-			toTest *= (bignumber[pos+j] - '0');
+			didgey *= (bignumber[pos+j] - '0');
 		}
-		if(toTest > biggest)
+		if(didgey > biggest)
 			{
-				biggest = toTest;
+				biggest = didgey;
 				bigstart = pos;
 			}
 	}
-	for(j = 0; j <= 12; j++)
-	{
-		biggestdigits[j] = bignumber[bigstart + j];
-	}
-	printf("Digits %s Product %lld", biggestdigits, biggest);
+	printf("Product %ld\n", biggest);
 }

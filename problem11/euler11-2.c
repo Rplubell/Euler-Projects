@@ -9,13 +9,15 @@ long vertMult(int array[][20])
 	int x, y, i;
 	long product;
 	long longest;
-	for(x = 0; x <=20; x++)
+	longest = 0;
+	for(x = 0; x <=19; x++)
 	{
-		for(y = 0; y <= 20-4; y++)
+		for(y = 0; y <= 19-4; y++)
 		{
-			for(i = 0, product = 0; i <=4; i++)
+			for(i = 0, product = 1; i <=3; i++)
 			{
 				product *= array[y + i][x];
+				printf("vert x %d y %d i %d currentint %d currentproduct %ld\n", x, y, i, array[y + i][x], product);
 			}
 			if(product > longest)
 				longest = product;
@@ -29,13 +31,15 @@ long horizMult(int array[][20])
         int x, y, i;
         long product;
         long longest;
-        for(x = 0; x <=20-4; x++)
+	longest = 0;
+        for(x = 0; x <=19-3; x++)
         {
-                for(y = 0; y <= 20; y++)
+                for(y = 0; y <= 19; y++)
                 {
-                        for(i = 0, product = 0; i <=4; i++)
+                        for(i = 0, product = 1; i <=3; i++)
                         {
                                 product *= array[y][x + i];
+				printf("horiz x %d y %d i %d currentint %d currentproduct %ld\n", x, y, i, array[y][x + i], product);
                         }
                         if(product > longest)
                                 longest = product;
@@ -49,13 +53,15 @@ long lrDiagMult(int array[][20])
         int x, y, i;
         long product;
         long longest;
-        for(x = 0; x <=20-4; x++)
+	longest = 1;
+        for(x = 0; x <=19-3; x++)
         {
-                for(y = 0; y <= 20-4; y++)
+                for(y = 0; y <= 19-4; y++)
                 {
-                        for(i = 0, product = 0; i <=4; i++)
+                        for(i = 0, product = 1; i <=3; i++)
                         {
                                 product *= array[y + i][x + i];
+				printf("lrDiag x %d y %d i %d currentint %d currentproduct %ld\n", x, y, i, array[y + i][x + i], product);
                         }
                         if(product > longest)
                                 longest = product;
@@ -69,14 +75,16 @@ long rlDiagMult(int array[][20])
         int x, y, i;
         long product;
         long longest;
-        for(x = 4; x <=20; x++)
+	longest = 1;
+        for(x = 3; x <=19; x++)
         {
-                for(y = 0; y <= 20-4; y++)
+                for(y = 0; y <= 19-3; y++)
                 {
-                        for(i = 0, product = 0; i <=4; i++)
+                        for(i = 0, product = 1; i <=3; i++)
                         {
-                                product *= array[y + i][x + i];
-                        }
+                                product *= array[y + i][x - i];
+                        	printf("rlDiag x %d y %d i %d currentint %d currentproduct %ld\n", x, y, i, array[y + i][x - i], product);
+			}
                         if(product > longest)
                                 longest = product;
                 }
@@ -99,15 +107,15 @@ int main()
 	char* ptr;
 
 	//printf("%s \n", buffer);
-	for(ypos = 0; fgets(buffer, sizeof(buffer), fp)!= NULL && ypos <= 20; ypos++)
+	for(ypos = 0; fgets(buffer, sizeof(buffer), fp)!= NULL && ypos <= 19; ypos++)
 	{
 		ptr = strtok(buffer, " ");
-		for(xpos = 0; ptr != 0 && xpos <= 20; xpos++)
+		for(xpos = 0; ptr != 0 && xpos <= 19; xpos++)
 		{
-			printf("token string %s\n", ptr);
+			//printf("token string %s\n", ptr);
 			toFill[ypos][xpos] = atoi(ptr);
-			printf("value: %d\n", toFill[ypos][xpos]);
-			printf("xpos %d ypos %d\n", xpos, ypos);
+			//printf("value: %d\n", toFill[ypos][xpos]);
+			//printf("xpos %d ypos %d\n", xpos, ypos);
 			ptr = strtok(NULL, " ");
 		}
 	}

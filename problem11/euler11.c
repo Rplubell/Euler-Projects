@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-//This will get the size of a grid of numbers in a txt file.
-int fillArray(*toFill[][], int xsize, int ysize, FILE *fp)
+//This will put .txt file into a 2d array
+int fillArray(int *toFill[][20], int xsize, int ysize, FILE *fp)
 {
-	int toFill[xsize][ysize], xpos, ypos, current, last, gridpos;
+	int xpos, ypos, current, last, gridpos;
 	char grid[((xsize * ysize)*2)+1];
 
 	fgets(grid, ((xsize * ysize)*2)+1, (FILE*)fp);
@@ -37,7 +37,7 @@ int main()
 	FILE *gridfp;
 	gridfp = fopen("grid.txt", "r");
 	int grid[20][20];
-	fillArray(*grid, 20, gridfp);
+	fillArray(*grid[][20], 20, 20, gridfp);
 
 	//This is for testing the array filler
 	int i, j;

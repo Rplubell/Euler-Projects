@@ -4,6 +4,86 @@
 
 #define BUFFERSIZE 1000
 
+long vertMult(int array[][20])
+{
+	int x, y, i;
+	long product;
+	long longest;
+	for(x = 0; x <=20; x++)
+	{
+		for(y = 0; y <= 20-4; y++)
+		{
+			for(i = 0, product = 0; i <=4; i++)
+			{
+				product *= array[y + i][x];
+			}
+			if(product > longest)
+				longest = product;
+		}
+	}
+	return longest;
+}
+
+long horizMult(int array[][20])
+{
+        int x, y, i;
+        long product;
+        long longest;
+        for(x = 0; x <=20-4; x++)
+        {
+                for(y = 0; y <= 20; y++)
+                {
+                        for(i = 0, product = 0; i <=4; i++)
+                        {
+                                product *= array[y][x + i];
+                        }
+                        if(product > longest)
+                                longest = product;
+                }
+        }
+        return longest;
+}
+
+long lrDiagMult(int array[][20])
+{
+        int x, y, i;
+        long product;
+        long longest;
+        for(x = 0; x <=20-4; x++)
+        {
+                for(y = 0; y <= 20-4; y++)
+                {
+                        for(i = 0, product = 0; i <=4; i++)
+                        {
+                                product *= array[y + i][x + i];
+                        }
+                        if(product > longest)
+                                longest = product;
+                }
+        }
+        return longest;
+}
+
+long rlDiagMult(int array[][20])
+{
+        int x, y, i;
+        long product;
+        long longest;
+        for(x = 4; x <=20; x++)
+        {
+                for(y = 0; y <= 20-4; y++)
+                {
+                        for(i = 0, product = 0; i <=4; i++)
+                        {
+                                product *= array[y + i][x + i];
+                        }
+                        if(product > longest)
+                                longest = product;
+                }
+        }
+        return longest;
+}
+
 int main()
 {
 	FILE *fp;
@@ -34,10 +114,27 @@ int main()
 
 	fclose(fp);
 
+	long longest, holder;
+
+	longest = vertMult(toFill);
+	holder = horizMult(toFill);
+	if(holder > longest)//Holder used to speed up process
+		longest = holder;
+	holder = lrDiagMult(toFill);
+	if(holder > longest)
+                longest = holder;
+	holder = rlDiagMult(toFill);
+	if(holder > longest)
+                longest = holder;
+
+	printf("%ld longest\n", longest);
+
+	/*//This prints contents of array
 	int i, x;
 	for(i = 0; i < 20; i++)
 	{
+		printf("\n");
 		for(x = 0; x < 20; x++)
-			printf("%d\n", toFill[i][x]);
-	}
+			printf("%d ", toFill[i][x]);
+	}*/
 }

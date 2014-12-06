@@ -10,13 +10,14 @@ int makePrimeArray(long * primearr[], int amt)
 		numberlist[i - 2] = i;
 	}
 
-	for(divisor = 2; 
+	ppoint = 0;
+	for(divisor = 2; ppoint <= amt;)
 	{
-		for(i = 0; i <= amt; i++)
+		for(i = ppoint; i <= amt; i++)
 		{
 			if(numberlist[i] % divisor == 0)
 				marked[i] = 1;
-			else
+			else if(marked[i] != 1)
 				marked[i] = 0;
 		}
 		for(i = 0; i <= amt; i++)
@@ -24,10 +25,17 @@ int makePrimeArray(long * primearr[], int amt)
 			if(marked[i] == 0)
 			{
 				divisor = numberlist[i];
+				ppoint = i;
 				break;
 			}
 		}
 	}
+	for(i = 0; i <= amt; i++)
+	{
+		if(marked[i] == 0)
+			primearr[amtprimes++] = numberlist[i];
+	}
+	return 0;
 }
 
 long getTri(long amt, long last, long lastamt)
@@ -67,13 +75,9 @@ int main()
 			printf("%d\n", i);
 	}
 	printf("%ld", getTri(i-1));*/
-	long i;
-	long last;
-	long lastamt;
-	last = 0;
-	lastamt = 0;
-	for(i = 0; i < 2000000; i++)
-	{
-		printf("%ld\n", getTri(i, last, lastamt));
-	}
+
+	long primes[100];
+
+	makePrimeArray(*primes, 100);
+	printf("%ld\n", primes[1]);
 }

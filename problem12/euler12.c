@@ -58,7 +58,7 @@ int makePrimeArray(long *primearr, int amt)
 			primearr[j++] = numberlist[i];
 	}
 
-	return 0;
+	return j-1;
 }
 
 long getTri(long amt, long last, long lastamt)
@@ -89,8 +89,8 @@ int checkDivs(long n)
 int main()
 {
 	int i;
-	long array[100];
-	makePrimeArray(array, 100);
-	for(i = 0; i <= 100; i++)
+	long array[1000];
+	int j = makePrimeArray(array, 1000);
+	for(i = 0; i <= j; i++)
 		printf("%ld\n", array[i]);
 }

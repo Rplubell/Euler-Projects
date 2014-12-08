@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 
-int makePrimeArray(long *primearr, int amt)
+#define SIZE 100000
+
+long makePrimeArray(long *primearr, long amt)
 {
-	int i;
+	long i;
 	long numberlist[amt];		//This will be sieved
 	int marked[amt];		//This is used to keep track of non-primes
 
@@ -14,7 +16,7 @@ int makePrimeArray(long *primearr, int amt)
 	}
 
 	//Sieve the array
-	int posInArr, divPos, divSet, test;
+	long posInArr, divPos, divSet, test;
 	long primes[amt];
 	long divisor = 2;
 	divPos = 0;
@@ -23,8 +25,6 @@ int makePrimeArray(long *primearr, int amt)
 	//This will continue until at the end of array
 	while(divPos <= amt)
 	{
-		test++;
-		printf("Cycles: %d\n", test);
 		for(posInArr = divPos + 1; posInArr <= amt; posInArr++)
 		{
 			//Modulo stuff
@@ -49,7 +49,7 @@ int makePrimeArray(long *primearr, int amt)
 	}
 
 	//Fill array with non-marked numbers
-	int j = 0;
+	long j = 0;
 	for(i = 0; i <= amt; i++)
 	{
 		if(marked[i] != 1)
@@ -65,8 +65,8 @@ long getTri(long amt, long last, long lastamt)
 	long current;
 	current = 0;
 
-	for(i = lastamt; i <= amt; i++)
-		current += i;
+	for(i = lastamt + 1; i <= amt; i++)
+		current += current + i;
 
 	return current;
 }
@@ -85,56 +85,47 @@ int checkDivs(long n)
 	return divs;
 }
 
-int isNatural(long double n)
-{
-	long n2;
-	n2 = n;
-	if(n2 == n)
-		return 1;
-	else return 0;
-}
-
 int fastCheckDivs(long n, int amtprimes, long *primeArray)
 {//This needs double fors or double vars. needs to change prime at diff rate
 	int divs = 0;
-	int i, j;
+	long i;
 	long current = n;
-	for(i = 0; i <= amtprimes; i++)
+	long double nat;
+	for(i = 0; i <= amtprimes && primeArray[i] < n;)
 	{
-		if(isNatural(current / primeArray[j]) && primeArray[j] != n && primeArray[j] > n)
+		//printf("Amtpr %d primarr[i] %ld N %ld", amtprimes, primeArray[i], n);
+		if(current % primeArray[i] == 0)
 		{
 			divs++;
-			current = n / primeArray[i];
+			current = current / primeArray[i];
 		} else
 		{
 			current = n;
-			j++;
+			i++;
 		}
 	}
 	divs += 2;//This is to compensate for 1 and the number itself.
+	return divs;
 }
 
 int main()
 {
-	long array[10000];
-	int amtprimes = makePrimeArray(array, 10000);
+	long array[SIZE];
+	long amtprimes = makePrimeArray(array, SIZE);
 	long tri, last, lastamt;
-	int amttri, divs;
+	long amttri, divs;
 
-	last = 0;
-	lastamt = 0;
+	last = 1;
+	lastamt = 2;
 
 	tri = getTri(1, last, lastamt);
 	printf("floaty%ld\n", tri);
 
-	for(amttri = 1; amttri <= 10000; amttri++)
+	for(amttri = 2; amttri <= SIZE; amttri++)
 	{
-		printf("In for\n");
 		tri = getTri(amttri, last, lastamt);
-		printf("Got tri\n");
+		printf("%ld\n", tri);
 		divs = fastCheckDivs(tri, amtprimes, array);
-		printf("Checked divs\n");
-		printf("Divs %d\n", divs);
 		if(divs >= 500)
 		{
 			printf("Dis one got 500 %ld\n", tri);
@@ -143,6 +134,4 @@ int main()
 		lastamt = amttri;
 		last = tri;
 	}
-
-	printf("Natural test %d\n", isNatural(getTri(1, 0, 0)));
 }

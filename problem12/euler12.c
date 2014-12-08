@@ -2,6 +2,7 @@
 #include <math.h>
 
 #define SIZE 100000
+#define TRISIZE 10000000
 
 long makePrimeArray(long *primearr, long amt)
 {
@@ -59,14 +60,17 @@ long makePrimeArray(long *primearr, long amt)
 	return j-1;
 }
 
-long getTri(long amt, long last, long lastamt)
+long getTri(long amt)
 {
 	long i;
 	long current;
 	current = 0;
 
-	for(i = lastamt + 1; i <= amt; i++)
-		current += current + i;
+	//for(i = lastamt + 1; i <= amt; i++)
+	//	current = current + i;
+
+	for(i = 0; i < amt; i++)
+		current += i;
 
 	return current;
 }
@@ -112,26 +116,22 @@ int main()
 {
 	long array[SIZE];
 	long amtprimes = makePrimeArray(array, SIZE);
-	long tri, last, lastamt;
+	long tri;
 	long amttri, divs;
 
-	last = 1;
-	lastamt = 2;
-
-	tri = getTri(1, last, lastamt);
+	printf("%d\n", fastCheckDivs(28, amtprimes, array));
+	/*tri = getTri(3);
 	printf("floaty%ld\n", tri);
 
-	for(amttri = 2; amttri <= SIZE; amttri++)
+	for(amttri = 1; tri <= TRISIZE; amttri++)
 	{
-		tri = getTri(amttri, last, lastamt);
-		printf("%ld\n", tri);
+		tri = getTri(amttri);
 		divs = fastCheckDivs(tri, amtprimes, array);
+		printf("%ld\n", divs);
 		if(divs >= 500)
 		{
 			printf("Dis one got 500 %ld\n", tri);
 			break;
 		}
-		lastamt = amttri;
-		last = tri;
-	}
+	}*/
 }

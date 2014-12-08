@@ -86,16 +86,51 @@ int checkDivs(long n)
 	return divs;
 }
 
-int fastCheckDivs(long n, long *primeArray)
+int isNatural(long double n)
 {
-	
+	long n2;
+	if((n2 = (long)n) == n)
+		return 1;
+	else return 0;
+}
+
+int fastCheckDivs(long n, int amtprimes, long *primeArray)
+{
+	int divs = 0;
+	int i;
+	long current = n;
+	for(i = 0; i <= amtprimes; i++)
+	{
+		if(isNatural(current / primeArray[i]) && primeArray[i] != n && primeArray[i] > n)
+		{
+			divs++;
+			current = n / primeArray[i];
+		} else current = n;
+	}
+	divs += 2;//This is to compensate for 1 and the number itself.
 }
 
 int main()
 {
-	int i;
+	//THis doesn't work yet because fastCheckDivs isn't ready yet.
 	long array[1000];
-	int j = makePrimeArray(array, 1000);
-	for(i = 0; i <= j; i++)
-		printf("%ld\n", array[i]);
+	makePrimeArray(array, 1000);
+	long tri, last, lastamt;
+	int amttri, divs;
+
+	last = 0;
+	lastamt = 0;
+
+	tri = getTri(1, last, lastamt);
+	printf("%ld\n", tri);
+
+	for(amttri = 0; amttri <= 1000 && tri = getTri(amttri, last, lastamt); lastamt = amttri++ && last = tri)
+	{
+		divs = fastCheckDivs(tri, 1000, array);
+		printf("Divs %d\n", divs);
+		if(divs >= 500)
+		{
+			printf("tri %ld\n", tri);
+		}
+	}
 }

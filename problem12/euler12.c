@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int makePrimeArray(long * primearr[], int amt)
+int makePrimeArray(long *primearr, int amt)
 {
 	int i;
 	long numberlist[amt];		//This will be sieved
@@ -50,6 +50,14 @@ int makePrimeArray(long * primearr[], int amt)
 			break;
 	}
 
+	//Fill array with non-marked numbers
+	int j = 0;
+	for(i = 0; i <= amt; i++)
+	{
+		if(marked[i] != 1)
+			primearr[j++] = numberlist[i];
+	}
+
 	return 0;
 }
 
@@ -80,7 +88,9 @@ int checkDivs(long n)
 
 int main()
 {
-	long array[20];
-	makePrimeArray(*array, 20);
-	printf("%ld", array[2]);
+	int i;
+	long array[100];
+	makePrimeArray(array, 100);
+	for(i = 0; i <= 100; i++)
+		printf("%ld\n", array[i]);
 }

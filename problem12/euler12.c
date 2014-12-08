@@ -86,6 +86,11 @@ int checkDivs(long n)
 	return divs;
 }
 
+int fastCheckDivs(long n, long *primeArray)
+{
+	
+}
+
 int main()
 {
 	int i;

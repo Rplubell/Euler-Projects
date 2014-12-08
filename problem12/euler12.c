@@ -3,38 +3,53 @@
 
 int makePrimeArray(long * primearr[], int amt)
 {
-	int i, divisor, j, amtprimes, marked[amt], ppoint;
-	long numberlist[amt];
-	for(i = 2; i <= amt; i++)//Creates list of numbers from 2 - amt
+	int i;
+	long numberlist[amt];		//This will be sieved
+	int marked[amt];		//This is used to keep track of non-primes
+
+	//Create array of numbers from 2 - amt
+	for(i = 2; i <= amt + 2; i++)
 	{
+		printf("Generating numlist\n");
 		numberlist[i - 2] = i;
 	}
 
-	ppoint = 0;
-	for(divisor = 2; ppoint <= amt;)
+	//Sieve the array
+	int posInArr, divPos, divSet;
+	long primes[amt];
+	long divisor = 2;
+	divPos = 0;
+	i = 0;
+	printf("Seiving\n");
+	//This will continue until at the end of array
+	while(divPos <= amt)
 	{
-		for(i = ppoint; i <= amt; i++)
+		printf("While-ing divPos %d\n", divPos);
+		for(posInArr = divPos + 1; posInArr <= amt; posInArr++)
 		{
-			if(numberlist[i] % divisor == 0)
-				marked[i] = 1;
-			else if(marked[i] != 1)
-				marked[i] = 0;
+			printf("Modulo-ing posInArr %d\n", posInArr);
+			//Modulo stuff
+			if(numberlist[posInArr] % divisor == 0)
+				marked[posInArr] = 1;
+			else if(marked[posInArr] != 1) marked[posInArr] = 0;
 		}
-		for(i = 0; i <= amt; i++)
+
+		//Set next modulo-z0r
+		for(i = divPos + 1; i <= amt; i++)
 		{
-			if(marked[i] == 0)
+			printf("Setting next div marked %d numlis %ld\n", i, numberlist[i]);
+			if(marked[i] != 1)
 			{
+				divPos = i;//caught here
 				divisor = numberlist[i];
-				ppoint = i;
+				divSet = 1;
 				break;
-			}
+			} else divSet = 0;
 		}
+		if(divSet != 1)//This stops the loop if no more primes
+			break;
 	}
-	for(i = 0; i <= amt; i++)
-	{
-		if(marked[i] == 0)
-			primearr[amtprimes++] = numberlist[i];
-	}
+
 	return 0;
 }
 
@@ -42,12 +57,10 @@ long getTri(long amt, long last, long lastamt)
 {
 	long i;
 	long current;
-	current = last;
 
 	for(i = lastamt; i <= amt; i++)
-	{
 		current += i;
-	}
+
 	return current;
 }
 
@@ -67,17 +80,7 @@ int checkDivs(long n)
 
 int main()
 {
-	/*int i;
-	long last;
-	for(i = 0; checkDivs(getTri(i)) <= 500 && i < 26000; i++)
-	{
-		if(i % 50 == 0)
-			printf("%d\n", i);
-	}
-	printf("%ld", getTri(i-1));*/
-
-	long primes[100];
-
-	makePrimeArray(*primes, 100);
-	printf("%ld\n", primes[1]);
+	long array[20];
+	makePrimeArray(*array, 20);
+	printf("%ld", array[2]);
 }

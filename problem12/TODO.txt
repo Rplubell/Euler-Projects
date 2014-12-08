@@ -1,6 +1,6 @@
 TODO
 
-[-] Sieve - Create array of primes at set amt
+[-] Sieve of Eratosthenes- Create array of primes at set amt
 	[-] Create array of numbers starting at 2
 	[-] Create second array of booleans at same length(Called marked)
 	[-] Modulo each number in the array by 2 and check if it is equal to 0
@@ -13,7 +13,7 @@ not marked
 
 [-] Check Divisors
 	[-] Divide by a prime in previously generated primes array and check
-if the result is 0
+if the result is natural
 	[-] If result is natural, add one to amt of divisors and divide repeat
 with the result of original division until the result is not natural.
 	[-] Once result is unnatural, go to next prime and repeat until next 
